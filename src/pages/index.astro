@@ -7,9 +7,9 @@ const books = await getCollection('books')
 export const prerender = true
 ---
 
-<Layout title="Dev Books, libros para programadores">
+<Layout title="Dev Books">
 	<main>
-		<h1 class="text-center text-7xl font-extrabold mb-24">Dev 👨‍💻
+		<h1 class="text-gray-100 text-center text-7xl font-extrabold mb-24">Dev 👨‍💻
 			<span class="block">Books</span>
 		</h1>
 
@@ -38,7 +38,7 @@ export const prerender = true
 									</h2>
 
 									<p class="mb-4 text-gray-300 max-w-sm">{description}</p>
-									<span class="text-xs">⏳ Lectura en {readtime} minutos</span>
+									<span class="text-xs text-gray-300">⏳ Lectura en {readtime} minutos</span>
 								</div>
 							</article>
 						)

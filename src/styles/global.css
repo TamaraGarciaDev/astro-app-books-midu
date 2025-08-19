@@ -7,3 +7,12 @@
 body > div {
   @apply container;
 }
+
+.content {
+  color: #e5e7eb;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.content p { margin: 0 0 1em; }
+.content h1, .content h2, .content h3 { color: #fff; font-weight: 700; margin-top: 0; }
+.content a { color: #93c5fd; text-decoration: underline; }
