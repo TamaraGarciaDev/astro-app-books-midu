@@ -9,7 +9,16 @@ import astroParser from "astro-eslint-parser";
 export default defineConfig([
   { files: ["**/*.{js,mjs,cjs,ts,mts,cts}"], plugins: { js }, extends: ["js/recommended"] },
   { files: ["**/*.{js,mjs,cjs,ts,mts,cts}"], languageOptions: { globals: globals.node } },
-  tseslint.configs.recommended,
+  
+  ...tseslint.configs.recommended,
+  {
+    files: ["**/*.{ts,mts,cts,astro}"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": "off",
+      "no-unused-vars": "off"
+    }
+  },
+  
   { files: ["**/*.css"], plugins: { css }, language: "css/css", extends: ["css/recommended"] },
   {
     files: ["**/*.astro"],
@@ -18,5 +27,8 @@ export default defineConfig([
     languageOptions: {
       parser: astroParser,
     },
+    rules: {
+      "@typescript-eslint/no-unused-vars": "off",
+    }
   },
 ]);

@@ -6,8 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "tw:build": "tailwindcss -i src/styles/global.css -o /tmp/out.css --config tailwind.config.mjs"
+    "astro": "astro"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",

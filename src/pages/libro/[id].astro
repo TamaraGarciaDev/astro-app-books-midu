@@ -1,6 +1,9 @@
 ---
 import { getCollection, render } from "astro:content";
+import { SHOW_BUY_BUTTON } from "astro:env/server"
 import Layout from '../../layouts/Layout.astro';
+import AmazonLogo from "../../components/AmazonLogo.astro";
+import BookScore from "../../components/BookScore.astro";
 
 export async function getStaticPaths() {
   const books = await getCollection('books');
@@ -16,20 +19,43 @@ const { data, slug } = book;
 const { title, author, img, readtime, description, buy } = data;
 
 const { Content } = await render(book)
+
+export const prerender = true
 ---
 
 <Layout title={`${title} - Dev Books`}>
-  <div class="flex gap-12">
+  <div class="flex gap-12 items-start justify-center min-h-screen pt-8">
     <aside class="flex flex-col items-center gap-4">
       <a href='/' class="text-gray-100 hover:underline opacity-70">← Volver</a>
-      <img transition:name={`img-${slug}`} class="rounded w-72 h-auto" src={`/${img}`} alt={title} />
+      <img transition:name={`img-${slug}`} class="rounded w-65 h-auto" src={`/${img}`} alt={title} />
+      <BookScore server:defer id={slug}>
+        <span slot="fallback" class="text-xs text-gray-200">⭐️ Puntuación /5</span>
+      </BookScore>
+      {
+        SHOW_BUY_BUTTON && (
+          <a
+            href="{buy.spain}"
+            title="Comprar libro"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-balance inline-flex gap-2 items-center bg-yellow-400 hover:bg-yellow-500 active:bg-yellow-600 text-black font-bold py-2 px-4 rounded-lg border border-yellow-500 transition duration-200 ease-in-out hover:scale-105 justify-center text-center"
+            >
+            Comprar Amazon España
+            <AmazonLogo />
+            </a>
+          )
+      }
+    
     </aside>
 
     <main class="text-white">
       <h1 transition:name={`title-${slug}`} class="text-4xl font-bold mb-4">{title}</h1>
-      <article class="content">
+      <article class="content max-w-2xl">
         <Content />
       </article>
     </main>
   </div>
 </Layout>
+
+
+
